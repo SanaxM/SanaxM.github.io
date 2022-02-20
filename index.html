@@ -149,32 +149,32 @@
   }
   
   function breaks()
-  {
-    //get the current interval
-    hrs = hours;
-    mins = minutes;
-    sec = seconds;
+    {
+      //get the current interval
+      hrs = hours;
+      mins = minutes;
+      sec = seconds;
 
-    //clear it so it stops working
-    clearInterval(t_interval);
+      //clear it so it stops working
+      clearInterval(t_interval);
 
-    //set pause flag to true so that when start is pressed again, it begins at the current time
-    pause = true;
-  }
+      //set pause flag to true so that when start is pressed again, it begins at the current time
+      pause = true;
+    }
 
   function reset()
-  {
-    //reset all the variables
-    t_interval = null;
-    secSet, startInterval, pause = false;
-    document.getElementById("timer").innerHTML = "00 : 00 : 00";
-  }
+    {
+      //reset all the variables
+      t_interval = null;
+      secSet, startInterval, pause = false;
+      document.getElementById("timer").innerHTML = "00 : 00 : 00";
+    }
 
   function finish()
-  {
-    //finish the intervals and reset all the values
-    clearInterval(t_interval);
-    document.getElementById("timer").innerHTML = "00 : 00 : 00";
-    reset();
-  }
+    {
+      //finish the intervals and reset all the values
+      clearInterval(t_interval);
+      document.getElementById("timer").innerHTML = "00 : 00 : 00";
+      reset();
+    }
 </script>
