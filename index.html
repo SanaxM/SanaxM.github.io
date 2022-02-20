@@ -63,18 +63,37 @@
     minutes = document.getElementById("m").value;
     seconds = document.getElementById("s").value;
 
-    //set the t_interval to decrease 1 second every second when values are entered, or count up when values are blank
-    if (seconds <= 59 && (hours != "" && minutes != "" && seconds != ""))
-    {
-      t_interval = setInterval(timeChange, 1000);    
-    }
-    else if (hours == "" && minutes == "" && seconds == "")
+    //set the t_interval to count up when values are blank, or decrease 1 second every second when values are entered
+    if (hours == "" && minutes == "" && seconds == "")
     {
       hours = 0;
       minutes = 0;
       seconds = 0;
       t_interval = setInterval(countUp, 1000);  
     }
+    else
+    {
+      //instantiate any empty vars to 0
+      if (hours == "")
+      {
+        hours = 0;
+      }
+      if (minutes == "")
+      {
+        minutes = 0;
+      }
+      if (seconds == "")
+      {
+        seconds = 0;
+      }
+
+      //if seconds is less than or equal to 59, start the timer
+      if (seconds <= 59)
+      {
+        t_interval = setInterval(timeChange, 1000);    
+      }
+    }
+
   }
   function countUp()
   {
@@ -154,19 +173,19 @@
     //display the time & account for an extra zero for single digits
     if (minutes < 10 && seconds >= 10 && pause == false)
     {
-      document.getElementById("timer").innerHTML = 0 + hours + " : " + 0 + minutes + " : " + seconds;
+      document.getElementById("timer").innerHTML = 0 + "" + hours + " : " + 0 + minutes + " : " + seconds;
     }
     else if (minutes >= 10 && seconds < 10 && pause == false)
     {
-      document.getElementById("timer").innerHTML = 0 + hours + " : " +  minutes + " : " + 0 + seconds;    
+      document.getElementById("timer").innerHTML = 0 + "" + hours + " : " +  minutes + " : " + 0 + seconds;    
     }
     else if (minutes < 10 && seconds < 10 && pause == false)
     {
-      document.getElementById("timer").innerHTML = 0 + hours + " : " + 0 + minutes + " : " + 0 + seconds;
+      document.getElementById("timer").innerHTML = 0 + "" + hours + " : " + 0 + minutes + " : " + 0 + seconds;
     }
     else if (pause == false)
     {
-      document.getElementById("timer").innerHTML = 0 + hours + " : " + minutes + " : " + seconds;
+      document.getElementById("timer").innerHTML = 0 + "" + hours + " : " + minutes + " : " + seconds;
     }
 
     //break function to reset the time to the time paused
