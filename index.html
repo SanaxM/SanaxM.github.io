@@ -49,7 +49,7 @@
 
 <script type="text/javascript">
   var hours, minutes, seconds = 0;
-  var secSet, startInterval, pause = false;
+  var secSet, pressStart, pause = false;
   var t_interval = null;
   var hrs, mins, sec = null;
 
@@ -57,43 +57,46 @@
 
   function start()
   {
-    //get vals
-    //if statement for each to check if the element value is 0 or blank.
-    hours = document.getElementById("h").value;
-    minutes = document.getElementById("m").value;
-    seconds = document.getElementById("s").value;
+    if (pressStart == false)
+    {
+      pressStart = true;
+      //get vals
+      //if statement for each to check if the element value is 0 or blank.
+      hours = document.getElementById("h").value;
+      minutes = document.getElementById("m").value;
+      seconds = document.getElementById("s").value;
 
-    //set the t_interval to count up when values are blank, or decrease 1 second every second when values are entered
-    if (hours == "" && minutes == "" && seconds == "")
-    {
-      hours = 0;
-      minutes = 0;
-      seconds = 0;
-      t_interval = setInterval(countUp, 1000);  
-    }
-    else
-    {
-      //instantiate any empty vars to 0
-      if (hours == "")
+      //set the t_interval to count up when values are blank, or decrease 1 second every second when values are entered
+      if (hours == "" && minutes == "" && seconds == "")
       {
         hours = 0;
-      }
-      if (minutes == "")
-      {
         minutes = 0;
-      }
-      if (seconds == "")
-      {
         seconds = 0;
+        t_interval = setInterval(countUp, 1000);
       }
-
-      //if seconds is less than or equal to 59, start the timer
-      if (seconds <= 59)
+      else
       {
-        t_interval = setInterval(timeChange, 1000);    
+        //instantiate any empty vars to 0
+        if (hours == "")
+        {
+          hours = 0;
+        }
+        if (minutes == "")
+        {
+          minutes = 0;
+        }
+        if (seconds == "")
+        {
+          seconds = 0;
+        }
+
+        //if seconds is less than or equal to 59, start the timer
+        if (seconds <= 59)
+        {
+          t_interval = setInterval(timeChange, 1000);
+        }
       }
     }
-
   }
   function countUp()
   {
@@ -248,23 +251,29 @@
   
   function breaks()
   {
-    //get the current interval
-    hrs = hours;
-    mins = minutes;
-    sec = seconds;
+    if (minutes != 0 && seconds != 0)
+    {
+      //get the current interval
+      hrs = hours;
+      mins = minutes;
+      sec = seconds;
 
-    //clear it so it stops working
-    clearInterval(t_interval);
+      //clear it so it stops working
+      clearInterval(t_interval);
 
-    //set pause flag to true so that when start is pressed again, it begins at the current time
-    pause = true;
+      //set pause flag to true so that when start is pressed again, it begins at the current time
+      pause = true;
+
+      //set pressStart to false so it begins again
+      pressStart = false;
+    }
   }
 
   function reset()
   {
     //reset all the variables
     t_interval = null;
-    secSet, startInterval, pause = false;
+    secSet, pressStart, pause = false;
     document.getElementById("timer").innerHTML = "00 : 00 : 00";
   }
 
@@ -273,6 +282,7 @@
     //finish the intervals and reset all the values
     clearInterval(t_interval);
     document.getElementById("timer").innerHTML = "00 : 00 : 00";
+    pressStart = false;
     reset();
   }
 </script>
