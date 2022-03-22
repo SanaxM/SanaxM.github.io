@@ -252,7 +252,7 @@
   
   function breaks()
   {
-    if (minutes != 0 && seconds != 0)
+    if (seconds != 0 || (seconds == 0 && minutes > 0))
     {
       //get the current interval
       hrs = hours;
