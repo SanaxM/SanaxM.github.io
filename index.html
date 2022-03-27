@@ -191,6 +191,16 @@
     {
       document.getElementById("timer").innerHTML = 0 + "" + hours + " : " + minutes + " : " + seconds;
     }
+    
+    //if timer is up, play the ding sound & clear the interval to prevent repeated sound
+    if (seconds == 0 && minutes == 0 && hours == 0)
+    {
+      const ding = new Audio('Ding.mp3');
+      ding.loop = false;
+      ding.play();
+      clearInterval(t_interval);
+      finish();
+    }
 
     //break function to reset the time to the time paused
     if (pause == true)
